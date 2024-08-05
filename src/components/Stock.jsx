@@ -1,4 +1,4 @@
-export default function Stock() {
+export default function Stock({stock}) {
   /* Challenge
 
     Aşağıdaki değişkenler şu anda verilerle sabit kodlanmıştır. Sizin göreviniz aşağıdakileri yaparak bunları dinamik olarak oluşturulmuş değerlere dönüştürmektir: 
@@ -30,23 +30,28 @@ export default function Stock() {
         4. Değişkenler aşağıdakinden daha verimli bir şekilde ayarlanabilir. Ekrana yansıtılan son değerler istediğiniz gibi olduğu sürece, değişkenlerin ayarlanma şeklini istediğiniz gibi değiştirebilirsiniz. Okunabilirliği korurken kodunuzu olabildiğince kısa ve DRY (Kendinizi Tekrar Etmeyin) yapmaya çalışın.
            
         Not: Sayıların stringlere dönüştürülmesiyle ilgili kısmı fazla düşünmeyin. Nasıl yaklaştığınıza bağlı olarak, bu challenge'ı çözerken  muhtemelen otomatik olarak gerçekleşecektir. 
+
 */
 
-  const stockName = "STOK";
+  //const stockName = "STOK";
 
-  const logo = "./images/question-solid.svg";
+  //const logo = "./images/question-solid.svg";
 
-  const currentPrice = "221.32";
+  //const currentPrice = "221.32";
 
-  const prevClosingPrice = "218.45";
+  //const prevClosingPrice = "218.45";
 
-  const numericalChange = "2.87";
+  //const numericalChange = "2.87";
+  const numericalChange = (stock.currentPrice - stock.prevClosingPrice).toFixed(2);
 
-  const rateChange = "1.31";
+  //const rateChange = "1.31";
+  const rateChange = ((numericalChange / stock.prevClosingPrice)*100).toFixed(2)
 
-  const colorClass = "green";
+  //const colorClass = "green";
+  const colorClass = numericalChange > 0 ? "green" : numericalChange < 0 ? "red" : undefined
 
-  const arrow = "⬆";
+  //const arrow = "⬆";
+  const arrow = numericalChange > 0 ? "⬆" : numericalChange < 0 ? "⬇" : "▬"
 
   return (
     <div className="stock-container">
@@ -58,17 +63,18 @@ export default function Stock() {
         <p>{rateChange}%</p>
       </div>
       <div>
-        <img className="logo" src={logo} />
+        <img className="logo" src={stock.logo} />  
       </div>
       <div>
-        <p>{stockName}</p>
+      <br />
+        <p>{stock.stockName}</p>
       </div>
       <div>
-        <p>${currentPrice}</p>
+        <p>${stock.currentPrice}</p>
         <p>Güncel Fiyat</p>
       </div>
       <div>
-        <p>Önceki Kapanış: ${prevClosingPrice}</p>
+        <p>Önceki Kapanış: ${stock.prevClosingPrice}</p>
       </div>
     </div>
   );
